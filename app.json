@@ -14,6 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "plugins": ["@config-plugins/react-native-google-cast"],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -24,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "satyuros.home.control"
     },
     "web": {
       "favicon": "./assets/favicon.png"

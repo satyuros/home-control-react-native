@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, TextInput } from "react-native";
 
 import { COLORS, FONTS, SIZES, assets } from "../constants";
+import VideoCast from "./VideoCast";
 
 const HomeHeader = ({ onSearch }) => {
   return (
@@ -11,6 +12,16 @@ const HomeHeader = ({ onSearch }) => {
         padding: SIZES.font,
       }}
     >
+      <View
+        style={{
+          flexDirection: "row",
+          height: 24,
+          marginBottom: 8,
+        }}
+      >
+        <VideoCast position={"absolute"} right={0} />
+      </View>
+
       <View
         style={{
           flexDirection: "row",
