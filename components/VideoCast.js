@@ -26,4 +26,4 @@ const VideoCast = ({ ...props }) => {
   );
 };
 
-export default Video;
+export default VideoCast;

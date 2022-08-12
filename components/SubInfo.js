@@ -31,11 +31,6 @@ export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
 export const EthPrice = ({ price }) => {
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Image
-        source={assets.eth}
-        resizeMode="contain"
-        style={{ width: 20, height: 20, marginRight: 2 }}
-      />
       <Text
         style={{
           fontFamily: FONTS.medium,
@@ -45,6 +40,11 @@ export const EthPrice = ({ price }) => {
       >
         {price}
       </Text>
+      <Image
+        source={assets.time_slider}
+        resizeMode="contain"
+        style={{ width: 20, height: 20, marginRight: 2 }}
+      />
     </View>
   );
 };

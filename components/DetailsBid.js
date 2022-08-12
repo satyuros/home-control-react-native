@@ -2,9 +2,18 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 
 import { EthPrice } from "./SubInfo";
-import { COLORS, SIZES, FONTS } from "../constants";
+import { COLORS, SIZES, FONTS, assets } from "../constants";
+import { CircleButton } from "./Button";
 
-const DetailsBid = ({ bid }) => {
+const DetailsBid = ({ file, handlePress }) => {
+  //TODO: move to common library
+  const bytesToSize = (bytes) => {
+    var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    if (bytes == 0) return "0 Byte";
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+  };
+
   return (
     <View
       style={{
@@ -15,13 +24,14 @@ const DetailsBid = ({ bid }) => {
         marginVertical: SIZES.base,
         paddingHorizontal: SIZES.base,
       }}
-      key={bid.id}
+      key={file.id}
     >
-      <Image
-        source={bid.image}
+      {/* <Image
+        source={assets.person02}
         resizeMode="contain"
         style={{ width: 48, height: 48 }}
-      />
+      /> */}
+      <CircleButton imgUrl={assets.play} handlePress={handlePress} />
 
       <View
         style={{
@@ -37,7 +47,7 @@ const DetailsBid = ({ bid }) => {
             color: COLORS.primary,
           }}
         >
-          Bid placed by {bid.name}
+          {file.title}
         </Text>
         <Text
           style={{
@@ -47,11 +57,11 @@ const DetailsBid = ({ bid }) => {
             marginTop: 3,
           }}
         >
-          {bid.date}
+          {bytesToSize(file.size)} | {file.resolution} | {file.mime}
         </Text>
       </View>
 
-      <EthPrice price={bid.price} />
+      <EthPrice price={file.duration} />
     </View>
   );
 };
