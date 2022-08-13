@@ -60,7 +60,7 @@ const HomeHeader = ({ onSearch }) => {
           style={{
             fontFamily: FONTS.regular,
             fontSize: SIZES.small,
-            color: COLORS.white,
+            color: COLORS.textIcons,
           }}
         >
           Hello Victoria 👋
@@ -70,7 +70,7 @@ const HomeHeader = ({ onSearch }) => {
           style={{
             fontFamily: FONTS.bold,
             fontSize: SIZES.large,
-            color: COLORS.white,
+            color: COLORS.textIcons,
             marginTop: SIZES.base / 2,
           }}
         >
@@ -83,7 +83,7 @@ const HomeHeader = ({ onSearch }) => {
           style={{
             width: "100%",
             borderRadius: SIZES.font,
-            backgroundColor: COLORS.gray,
+            backgroundColor: COLORS.textIcons,
             flexDirection: "row",
             alignItems: "center",
             paddingHorizontal: SIZES.font,
@@ -93,10 +93,11 @@ const HomeHeader = ({ onSearch }) => {
           <Image
             source={assets.search}
             resizeMode="contain"
+            tintColor="black"
             style={{ width: 20, height: 20, marginRight: SIZES.base }}
           />
           <TextInput
-            placeholder="Search NFTs"
+            placeholder="Search folder"
             style={{ flex: 1 }}
             onChangeText={onSearch}
           />

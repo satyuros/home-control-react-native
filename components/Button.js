@@ -9,8 +9,7 @@ export const CircleButton = ({ imgUrl, handlePress, ...props }) => {
       style={{
         width: 40,
         height: 40,
-        backgroundColor: COLORS.white,
-        position: "absolute",
+        backgroundColor: COLORS.textIcons,
         borderRadius: SIZES.extraLarge,
         alignItems: "center",
         justifyContent: "center",
@@ -38,7 +37,7 @@ export const RectButton = ({
   return (
     <TouchableOpacity
       style={{
-        backgroundColor: COLORS.primary,
+        backgroundColor: COLORS.accent,
         padding: SIZES.small,
         borderRadius: SIZES.extraLarge,
         minWidth: minWidth,
@@ -50,11 +49,11 @@ export const RectButton = ({
         style={{
           fontFamily: FONTS.semiBold,
           fontSize: fontSize,
-          color: COLORS.white,
+          color: COLORS.textIcons,
           textAlign: "center",
         }}
       >
-        {text ?? "Place a bid"}
+        {text}
       </Text>
     </TouchableOpacity>
   );

@@ -6,12 +6,21 @@ import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 import { SubInfo, EthPrice, NFTTitle } from "./SubInfo";
 import { RectButton, CircleButton } from "./Button";
 
-const NFTCard = ({ data }) => {
+const FolderCard = ({ data }) => {
   const navigation = useNavigation();
+
+  //TODO: move to common
+  function getTitle(data) {
+    return data.parentFolderName === "(null)" ||
+      data.name.includes(data.parentFolderName)
+      ? data.name
+      : `${data.parentFolderName} - ${data.name}`;
+  }
+
   return (
     <View
       style={{
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.textIcons,
         borderRadius: SIZES.font,
         marginBottom: SIZES.extraLarge,
         margin: SIZES.base,
@@ -20,7 +29,7 @@ const NFTCard = ({ data }) => {
     >
       <View style={{ width: "100%", height: 250 }}>
         <Image
-          source={data.image}
+          source={assets.nft03}
           resizeMode="cover"
           style={{
             width: "100%",
@@ -35,8 +44,8 @@ const NFTCard = ({ data }) => {
       <SubInfo />
       <View style={{ width: "100%", padding: SIZES.font }}>
         <NFTTitle
-          title={data.name}
-          subTitle={data.creator}
+          title={getTitle(data)}
+          //subTitle={data.creator}
           titleSize={SIZES.large}
           subTitleSize={SIZES.small}
         />
@@ -49,8 +58,9 @@ const NFTCard = ({ data }) => {
             alignItems: "center",
           }}
         >
-          <EthPrice price={data.price} />
+          <EthPrice price={/*data.price*/ 100} />
           <RectButton
+            text="Open folder"
             minWidth={120}
             fontSize={SIZES.font}
             handlePress={() => navigation.navigate("Details", { data })}
@@ -61,4 +71,4 @@ const NFTCard = ({ data }) => {
   );
 };
 
-export default NFTCard;
+export default FolderCard;

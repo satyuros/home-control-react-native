@@ -5,8 +5,16 @@ import { EthPrice, NFTTitle } from "./SubInfo";
 import { COLORS, SIZES, FONTS } from "../constants";
 
 const DetailsDesc = ({ data }) => {
+  data.description =
+    "The action painter abstract expressionists were directly influenced by automatism. Pollock channelled this into producing gestural. Lorem ipsum dolor sit amet consectetur adipiscing elit consequat accumsan sapien, lectus convallis malesuada odio curae habitasse dignissim nascetur. Nulla sed velit erat vitae leo sem inceptos diam fames arcu hendrerit, quis ultrices in eleifend posuere ipsum conubia porttitor felis. Ullamcorper platea penatibus ornare egestas nulla ligula hendrerit nisl suscipit sociosqu maximus, tincidunt aptent habitant purus pharetra ultrices dapibus laoreet nisi lacinia. Porta malesuada netus vel sapien conubia porttitor aliquam ut pretium ante litora molestie senectus magna egestas sociosqu, eget aliquet fames pharetra felis posuere varius fringilla quisque in arcu montes eu ullamcorper.";
   const [text, setText] = useState(data.description.slice(0, 100));
   const [readMore, setReadMore] = useState(false);
+  function getTitle(data) {
+    return data.parentFolderName === "(null)" ||
+      data.name.includes(data.parentFolderName)
+      ? data.name
+      : `${data.parentFolderName} - ${data.name}`;
+  }
 
   return (
     <>
@@ -19,13 +27,13 @@ const DetailsDesc = ({ data }) => {
         }}
       >
         <NFTTitle
-          title={data.name}
-          subTitle={data.creator}
+          title={getTitle(data)}
+          subTitle={data.id}
           titleSize={SIZES.extraLarge}
           subTitleSize={SIZES.font}
         />
 
-        <EthPrice price={data.price} />
+        <EthPrice price="00.00" />
       </View>
 
       <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>

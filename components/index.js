@@ -1,15 +1,15 @@
 import HomeHeader from "./HomeHeader";
-import NFTCard from "./NFTCard";
+import FolderCard from "./FolderCard";
 import { RectButton, CircleButton } from "./Button";
 import { SubInfo, People, EndDate, EthPrice, NFTTitle } from "./SubInfo";
-import DetailsBid from "./DetailsBid";
+import DetailsVideoItem from "./DetailsVideoItem";
 import FocusedStatusBar from "./FocusedStatusBar";
 import DetailsDesc from "./DetailsDesc";
 import VideoCast from "./VideoCast";
 
 export {
   HomeHeader,
-  NFTCard,
+  FolderCard,
   SubInfo,
   People,
   EndDate,
@@ -17,7 +17,7 @@ export {
   CircleButton,
   EthPrice,
   NFTTitle,
-  DetailsBid,
+  DetailsVideoItem,
   FocusedStatusBar,
   DetailsDesc,
   VideoCast,

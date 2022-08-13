@@ -12,6 +12,8 @@
     "@config-plugins/react-native-google-cast": "^3.0.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^6.1.1",
+    "@rneui/base": "^4.0.0-rc.6",
+    "@rneui/themed": "^4.0.0-rc.6",
     "expo": "~46.0.3",
     "expo-app-loading": "^2.1.0",
     "expo-font": "~10.2.0",
@@ -26,6 +28,7 @@
     "react-native-google-cast": "^4.4.0",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "^3.15.0",
+    "react-native-svg": "^12.4.4",
     "react-native-web": "~0.18.7"
   },
   "devDependencies": {

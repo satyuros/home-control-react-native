@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 
 import { EthPrice } from "./SubInfo";
 import { COLORS, SIZES, FONTS, assets } from "../constants";
 import { CircleButton } from "./Button";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
-const DetailsBid = ({ file, handlePress }) => {
+const DetailsVideoItem = ({ file, isSelected, handlePress }) => {
   //TODO: move to common library
   const bytesToSize = (bytes) => {
     var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -21,6 +22,7 @@ const DetailsBid = ({ file, handlePress }) => {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        backgroundColor: isSelected ? COLORS.lightPrimary : null,
         marginVertical: SIZES.base,
         paddingHorizontal: SIZES.base,
       }}
@@ -31,7 +33,6 @@ const DetailsBid = ({ file, handlePress }) => {
         resizeMode="contain"
         style={{ width: 48, height: 48 }}
       /> */}
-      <CircleButton imgUrl={assets.play} handlePress={handlePress} />
 
       <View
         style={{
@@ -62,8 +63,13 @@ const DetailsBid = ({ file, handlePress }) => {
       </View>
 
       <EthPrice price={file.duration} />
+
+      <CircleButton
+        imgUrl={assets.play}
+        handlePress={() => handlePress(file)}
+      />
     </View>
   );
 };
 
-export default DetailsBid;
+export default DetailsVideoItem;

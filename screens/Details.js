@@ -22,10 +22,14 @@ import {
   DetailsDesc,
   DetailsBid,
   FocusedStatusBar,
+  DetailsVideoItem,
 } from "../components";
 import ApiService from "../services/api/ApiService";
+import { useStateContext } from "../context/StateContext";
+import VideoPlayer from "../components/VideoPlayer";
+
 const DetailsHeader = ({ data, navigation }) => (
-  <View style={{ width: "100%", height: 373 }}>
+  <View style={{ width: "100%", height: 173 }}>
     <Image
       source={assets.nft04}
       resizeMode="cover"
@@ -35,6 +39,7 @@ const DetailsHeader = ({ data, navigation }) => (
     <CircleButton
       imgUrl={assets.left}
       handlePress={() => navigation.goBack()}
+      position="absolute"
       left={15}
       top={StatusBar.currentHeight + 10}
     />
@@ -46,13 +51,14 @@ const DetailsHeader = ({ data, navigation }) => (
         height: 24,
         right: 15,
         top: StatusBar.currentHeight + 10,
-        tintColor: "black",
+        tintColor: "white",
       }}
     />
 
     <CircleButton
       imgUrl={assets.heart}
       right={15}
+      position="absolute"
       top={StatusBar.currentHeight + 74}
     />
   </View>
@@ -60,33 +66,34 @@ const DetailsHeader = ({ data, navigation }) => (
 
 const Details = ({ route, navigation }) => {
   const { data } = route.params;
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState();
   const client = useRemoteMediaClient();
+  const { currentVideo, playVideo } = useStateContext();
 
   const handleShowPress = () => {
     GoogleCast.showExpandedControls();
   };
 
-  const handleItemPress = (item) => {
-    //console.log(item);
-    if (client) {
-      client.loadMedia({
-        mediaInfo: {
-          contentUrl: "http://192.168.0.203:8200/MediaItems/" + item.id,
-          contentType: "video/mp4",
-        },
-      });
-    }
+  const handleItemPress = (itemPressed) => {
+    // if (!client) return;
+
+    // client.loadMedia({
+    //   mediaInfo: {
+    //     contentUrl: "http://192.168.0.203:8200/MediaItems/" + itemPressed.id,
+    //     contentType: "video/mp4",
+    //   },
+    // });
+    playVideo(itemPressed);
   };
 
   useEffect(() => {
     const api = new ApiService();
     api
-      .getFiles()
+      .getFiles(data.id)
       .then((response) => response.json())
       .then((response) => {
         setFiles(
-          response.files.slice(0, 200).map((item) => {
+          response.files.map((item) => {
             return {
               duration: item.duration,
               id: item.id,
@@ -115,27 +122,32 @@ const Details = ({ route, navigation }) => {
           width: "100%",
           position: "absolute",
           bottom: 0,
-          paddingVertical: SIZES.font,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "rgba(255,255,255,0.5)",
+          // backgroundColor: "rgba(255,255,0,0.5)",
           zIndex: 1,
         }}
       >
-        <RectButton
+        {/* <RectButton
           text="Show controls"
           minWidth={170}
           fontSize={SIZES.large}
           {...SHADOWS.dark}
           handlePress={handleShowPress}
-        />
+        /> */}
+        <VideoPlayer />
       </View>
 
       <FlatList
         data={files}
         renderItem={({ item }) => (
-          <DetailsBid file={item} handlePress={() => handleItemPress(item)} />
+          <DetailsVideoItem
+            file={item}
+            isSelected={item.id === currentVideo?.id}
+            handlePress={handleItemPress}
+          />
         )}
+        extraData={currentVideo}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: SIZES.extraLarge * 3 }}
         ListHeaderComponent={() => (

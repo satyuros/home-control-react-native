@@ -11,13 +11,22 @@ export class ApiService extends Component {
     };
   }
 
-  get(resource) {
+  get(resource, urlParams) {
+    console.log(`${resource} ${urlParams}`);
+    if (urlParams && !Array.isArray(urlParams)) {
+      throw Error("INVALID TYPE: urlParams should be an array.");
+    }
+
     const baseUrl = "http://192.168.0.203:8200/";
-    const request = fetch(baseUrl + resource, {
+    let url = baseUrl + resource;
+    if (urlParams) {
+      url += "/" + urlParams.join("/");
+    }
+    console.log(url);
+    const request = fetch(url, {
       method: "GET",
       headers: this.state.headers,
     });
-    console.log(this.state.headers);
     return request;
   }
 
@@ -37,6 +46,14 @@ export class ApiService extends Component {
 
   getFiles() {
     return this.get("files");
+  }
+
+  getFiles(folderId) {
+    return this.get("files", [folderId]);
+  }
+
+  getFolders() {
+    return this.get("folders");
   }
 }
 
